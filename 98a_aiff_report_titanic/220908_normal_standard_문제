@@ -1,0 +1,40 @@
+ 1. 표준화(Standaradization) 
+   값이 평균에 비해 얼마나 큰지 혹은 얼마나 작은지를 보여줍니다. 
+   하나의 관측치를 표준화했을 때 0보다 크면 평균보다 큰 값이고 0보다 작으면 0보다 작은 값입니다.
+  
+   from sklearn.preprocessing import StandardScaler
+
+   scaler = StandardScaler()
+   df_std = scaler.fit_transform(df)
+   pd.DataFrame(df_std, columns = ['x1_std', 'x2_std'])
+
+
+2. 정규화(normalization)
+    최소-최대 정규화는 데이터를 정규화하는 가장 일반적인 방법입니다. 
+    모든 feature에 대해 각각의 최소값 0, 최대값 1로, 그리고 다른 값들은 0과 1 사이의 값으로 변환합니다.
+
+   from sklearn.preprocessing import MinMaxScaler
+
+   scaler = MinMaxScaler()
+   df_minmax = scaler.fit_transform(df)
+   pd.DataFrame(df_minmax, columns = ['x1_minmax', 'x2_minmax'])
+
+
+3. 정규화(normalization), 왜 하는가? 
+    머신러닝 알고리즘은 데이터가 가진 feature(특성)들을 비교하여 데이터의 패턴을 찾는 것이라고 생각합니다.
+    그런데 데이터가 가진 feature의 스케일이 심하게 차이가 나는 경우 엉뚱한 결과가 나오거나, 
+    변화패턴이 잡히지 않아 머신러닝 시 학습이 불가능하게 될 것입니다.
+    모든 데이터 포인트가 동일한 정도의 스케일(중요도)로 반영되도록 해주는 게 
+    정규화(Normalization)의 목표라고 생각합니다.
+   
+4. 결론 
+  데이터 정규화는 머신러닝에서 꼭 알아야 하는 개념입니다. 
+  매우 훌륭한 데이터를 가지고도 정규화를 놓치면 
+  특정 feature가 다른 feature들을 완전히 지배할 수 있기 때문입니다. 
+  즉 feature에 치우친 결과를 도출할 수 있습니다.
+
+   정규화는 아래 두 가지 방법을 적절히 사용해서 문제에 적합한 결과를 도출해야 합니다.
+  
+   최소 최대 정규화: 모든 feature들의 스케일이 동일하지만, 이상치(outlier)를 잘 처리하지 못합니다.
+   Z-점수 정규화    : 이상치(outlier)를 잘 처리하지만, 정확히 동일한 척도로 정규화 된 데이터를 생성하지는 않습니다.
+
